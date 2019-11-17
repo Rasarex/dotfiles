@@ -1,8 +1,4 @@
-" vim-bootstrap 
 
-"*****************************************************************************
-"" Vim-PLug core
-"*****************************************************************************
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = "c,html,javascript,python,rust"
@@ -27,7 +23,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'Shougo/deoplete' , {'do': ':UpdateRemotePlugins'}
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
@@ -47,6 +43,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'ervandew/supertab'
 if isdirectory('/usr/local/opt/fzf')
 
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -54,6 +51,7 @@ else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 endif
+let g:deoplete#enable_at_startup = 1
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
@@ -113,19 +111,9 @@ Plug 'rust-lang/rust.vim'
 if filereadable(expand("~/.config/nvim/local_bundles.vim"))
   source ~/.config/nvim/local_bundles.vim
 endif
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 call plug#end()
-imap <expr><TAB>
-     \ neosnippet#expandable_or_jumpable() ? : 
-     \   "\<Plug>(neosnippet_expand_or_jump)" : 
-     \ pumvisible()? "\<C-y>" :
-     \ <SID>check_back_space() ? "\<TAB>" :
-     \ deoplete#mappings#manual_complete()
-
-  function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-  endfunction"}}}
 
 
 " Required:
@@ -244,7 +232,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
-let g:deoplete#enable_at_startup = 1
+set completeopt-=preview
 "*****************************************************************************
 "" Abbreviations
 "*****************************************************************************
@@ -392,8 +380,8 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ale
 let g:ale_linters = {}
-
-" Tagbar
+autocmd FileType plugin indent on
+" Tagba
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
@@ -451,10 +439,11 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "" Custom configs
 "*****************************************************************************
 
-" c
+" c:
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
-
+au FileType cpp :UltiSnipsAddFiletype cpp
+au FileType c :UltiSnipsAddFiletype c
 
 " html
 " for html files, 2 spaces
@@ -488,7 +477,7 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
+let g:jedi#completions_command = "<C-space>"
 let g:jedi#smart_auto_mappings = 0
 
 " ale

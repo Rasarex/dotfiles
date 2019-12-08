@@ -246,7 +246,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0 
+background_opacity: 1.0
 
 # Mouse bindings
 #
@@ -263,8 +263,8 @@ background_opacity: 1.0
 #
 # All available `mods` and `action` values are documented in the key binding
 # section.
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+# mouse_bindings:
+#  - { mouse: Middle, action: PasteSelection }
 
 mouse:
   # Click settings

@@ -1,7 +1,8 @@
   export ZSH="/home/rasarex/.oh-my-zsh"
+  export PATH=$PATH:~/bin
   eval $(dircolors ~/.dir_colors)
 
-ZSH_THEME="sunrise"
+ZSH_THEME=cdimascio-lambda
 HIST_STAMPS="dd/mm/yyyy"
 
 plugins=(
@@ -15,10 +16,10 @@ source $ZSH/oh-my-zsh.sh
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='mvim'
+   export EDITOR='nvim'
  fi
 
-alias vim='nvim'
+#alias vim='nvim'
 alias g++='g++ -Werror=vla'
 alias gcc='gcc -Werror=vla'
 alias clang='clang -Werror=vla'

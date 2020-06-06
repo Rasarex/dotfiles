@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
   int i = 0;
   sock.connect("tcp://localhost:8080");
   while (true) {
-    update_message = exec("playerctl status 2> /dev/null");
+    update_message = exec("playerctl status");
     if (update_message != "Playing\n") {
       sock.send(zmq::buffer(update_message), zmq::send_flags::dontwait);
       sock.recv(mess);
